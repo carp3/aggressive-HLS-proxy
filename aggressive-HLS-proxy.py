@@ -22,9 +22,18 @@ parser.add_argument('url', type=bytes,
 parser.add_argument('--port', type=int, default=8899,
                     help='listening port')
 
+parser.add_argument('--proxy', type=bytes, default="",
+                    help='Proxy server')
+
+
 args = parser.parse_args()
 
-print 'Start listening on port ' + str(args.port)
+
+print 'Start listening on http://localhost:' + str(args.port)
+
+if args.proxy is not "":
+    utility.setProxy(args.proxy)
+    print ("Using Proxy:  "+ str(args.proxy))
 
 directory = 'cache'
 
@@ -61,7 +70,7 @@ class Segments:
                 self._segment_size[segment] = utility.getSize(url)
                 self._segment_gid[segment] = self._aria.addUri([url],
                                                                {"dir": "cache", "file-allocation": "none",
-                                                                "max-file-not-found": 10, "split": 5})
+                                                                "max-file-not-found": 10, "split": 5,"all-proxy":args.proxy})
                 print ("New segment added:" + str(segment))
 
     def remove(self, segment):

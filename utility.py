@@ -10,16 +10,17 @@ import m3u8
 
 
 def setProxy(proxy):
-    pass
+    proxy = urllib2.ProxyHandler({
+                        'http': proxy,
+                        'https': proxy
+    })
+    opener = urllib2.build_opener(proxy)
+    urllib2.install_opener(opener)
+
 
 
 def download(url, dest=None):
-    req = urllib2.Request(url)
-    req.add_header('Referer', dirname(url))
-    req.add_header('User-Agent',
-                   'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36')
-
-    response = urllib2.urlopen(req)
+    response = _get_url(url)
     data = response.read()
     if dest is None:
         return data
@@ -29,13 +30,17 @@ def download(url, dest=None):
         f.close()
 
 
-def getSize(url):
+def _get_url(url):
     req = urllib2.Request(url)
     req.add_header('Referer', dirname(url))
     req.add_header('User-Agent',
                    'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36')
-
     response = urllib2.urlopen(req)
+    return response
+
+
+def getSize(url):
+    response = _get_url(url)
     return response.headers["Content-Length"]
 
 
