@@ -67,7 +67,7 @@ class Segments:
         url = dirname(args.url) + "/" + segment
         if len(segment) > 0:
             if segment not in self._segment_size:
-                self._segment_size[segment] = utility.getSize(url)
+                self._segment_size[segment] = 1
                 self._segment_gid[segment] = self._aria.addUri([url],
                                                                {"dir": "cache", "file-allocation": "none",
                                                                 "max-file-not-found": 10, "split": 5,"all-proxy":args.proxy})
