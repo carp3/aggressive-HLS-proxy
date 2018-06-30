@@ -6,28 +6,28 @@ If you have fast connection i recommend using [this](http://www.hls-proxy.com/) 
 
 ## Install
 
-#####Download or clone latest files:
+####Download or clone latest files:
 
 `git clone https://github.com/carp3/aggressive-HLS-proxy.git`
 
 `cd aggressive-HLS-proxy`
 
-#####Install dependencies:
+####Install dependencies:
 
 `pip install m3u8
 `
 
-#####Create cache dir and give write permission:
+####Create cache dir and give write permission:
 
 `mkdir cache && chmod +w cache
 `
 
-#####Run aria2c:
+####Run aria2c:
 
 `aria2c --enable-rpc --rpc-listen-all --max-concurrent-downloads=5 --max-connection-per-server=10 --min-split-size=1M
 `
 
-#####Run proxy:
+####Run proxy:
 
 `python2 aggressive-HLS-proxy http://domain.com/path/to/livetv.hls --port=8899 --proxy=proxyserver.com:3128 --delay=30
 `
