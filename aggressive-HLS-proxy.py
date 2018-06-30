@@ -131,11 +131,6 @@ def refreshM3U8():
             traceback.print_exception(*exc_info)
             del exc_info
 
-
-def announceTime():
-    print("Time")
-
-
 rl = RunLoop()
 rl.every(refreshM3U8, 10)
 rl.run()
