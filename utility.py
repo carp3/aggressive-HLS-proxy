@@ -49,6 +49,9 @@ def parseM3U8(input):
     m3u8_obj = m3u8.load(input)
     return m3u8_obj
 
+def listDiff(first, second):
+    second = set(second)
+    return [item for item in first if item not in second]
 
 class RootedHTTPServer(HTTPServer):
 
